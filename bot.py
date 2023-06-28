@@ -2,7 +2,7 @@ import discord, colorama
 from colorama import Fore
 from discord.ext import commands
 from art import text2art
-from Data import *
+from data import *
 
 intents = discord.Intents.all()
 client = discord.Client(intents=intents)
