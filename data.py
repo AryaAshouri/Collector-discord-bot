@@ -3,7 +3,7 @@ from datetime import datetime
 
 def send(message):
     now = datetime.now()
-    connection = sqlite3.connect("Database/Data.db")
+    connection = sqlite3.connect("Database/data.db")
     cursor = connection.cursor()
 
     cursor.execute('''CREATE TABLE IF NOT EXISTS Send(
@@ -35,7 +35,7 @@ def send(message):
 
 def delete(message):
     now = datetime.now()
-    connection = sqlite3.connect("Database/Data.db")
+    connection = sqlite3.connect("Database/data.db")
     cursor = connection.cursor()
 
     cursor.execute('''CREATE TABLE IF NOT EXISTS "Delete"(
@@ -67,7 +67,7 @@ def delete(message):
 
 def edit(before, after):
     now = datetime.now()
-    connection = sqlite3.connect("Database/Data.db")
+    connection = sqlite3.connect("Database/data.db")
     cursor = connection.cursor()
 
     cursor.execute('''CREATE TABLE IF NOT EXISTS Edit(

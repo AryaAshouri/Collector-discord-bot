@@ -3,6 +3,7 @@ from colorama import Fore
 from discord.ext import commands
 from art import text2art
 from data import *
+from birthday import *
 
 intents = discord.Intents.all()
 client = discord.Client(intents=intents)
@@ -27,12 +28,34 @@ async def on_message_edit(before, after):
 
 @bot.command()
 async def clear(message, num):
-    author_all_roles = []
-    for i in message.author.roles:
-        author_all_roles.append(i.name)
+    author_all_roles = [i.name for i in message.author.roles]
     if ("Administrator" in author_all_roles):
         await message.channel.purge(limit=int(num)+1)
     else:
         await message.reply(f"Hey {message.author} only admins could use this command")
+
+@bot.command()
+async def birthday(message, status, *, args):
+    if (args != ""):
+        if (status == "add"):
+            birthday_adder(message, args)
+            await message.reply('Your birthday has been added succesfuly')
+        elif (status == "update"):
+            birthday_updater(message, args)
+            await message.reply('Your birthday has been updated succesfuly')
+        else:
+            await message.reply("Command is not acceptable")
+    else:
+        if (status == "activate"):
+            birthday_teller(status)
+            await message.reply("Birthday has been activated succesfuly")
+
+        elif (status == "deactivate"):
+            birthday_teller(status)
+            await message.reply("Birthday has been deactivated succesfuly")
+
+        else:
+            await message.reply("Command is not acceptable")
+
 
 bot.run("MTEyMjkzOTUyNDg1MTQ0OTg5MA.Gea3w2.oiW_i68PvvRPlLqYw-TrESLFBSJpsfRxuUDxX8")
