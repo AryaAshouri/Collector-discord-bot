@@ -44,19 +44,30 @@ async def birthday(message, status, date=None):
             else:
                 await message.reply('Your birthday has been added succesfuly')
         elif (status == "update"):
-            birthday_updater(message, date)
-            await message.reply('Your birthday has been updated succesfuly')
+            result = birthday_updater(message, date)
+            if (result == False):
+                await message.reply("You haven't added your birthday yet")
+            else:
+                await message.reply('Your birthday has been updated succesfuly')
         else:
             await message.reply("Command is not acceptable")
     else:
         if (status == "activate"):
-            birthday_teller(status)
-            await message.reply("Birthday has been activated succesfuly")
+            author_all_roles = [i.name for i in message.author.roles]
+            if ("Administrator" in author_all_roles):
+                birthday_teller(status)
+                await message.reply("Birthday has been activated succesfuly")
+            else:
+                await message.reply(f"Hey {message.author} only admins could use this command")
 
         elif (status == "deactivate"):
-            birthday_teller(status)
-            await message.reply("Birthday has been deactivated succesfuly")
-
+            author_all_roles = [i.name for i in message.author.roles]
+            if ("Administrator" in author_all_roles):
+                birthday_teller(status)
+                await message.reply("Birthday has been deactivated succesfuly")
+            else:
+                await message.reply(f"Hey {message.author} only admins could use this command")
+                
         else:
             print(status)
             await message.reply("Command is not acceptable")
