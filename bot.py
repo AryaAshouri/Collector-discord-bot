@@ -35,13 +35,16 @@ async def clear(message, num):
         await message.reply(f"Hey {message.author} only admins could use this command")
 
 @bot.command()
-async def birthday(message, status, *, args):
-    if (args != ""):
+async def birthday(message, status, date=None):
+    if (date != None):
         if (status == "add"):
-            birthday_adder(message, args)
-            await message.reply('Your birthday has been added succesfuly')
+            result = birthday_adder(message, date)
+            if (result == False):
+                await message.reply("You have already added your Birthday")
+            else:
+                await message.reply('Your birthday has been added succesfuly')
         elif (status == "update"):
-            birthday_updater(message, args)
+            birthday_updater(message, date)
             await message.reply('Your birthday has been updated succesfuly')
         else:
             await message.reply("Command is not acceptable")
@@ -55,6 +58,7 @@ async def birthday(message, status, *, args):
             await message.reply("Birthday has been deactivated succesfuly")
 
         else:
+            print(status)
             await message.reply("Command is not acceptable")
 
 
