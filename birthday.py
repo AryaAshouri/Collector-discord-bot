@@ -1,4 +1,5 @@
 import sqlite3
+from time import *
 from datetime import date
 from datetime import datetime
 
@@ -16,10 +17,14 @@ def birthday_teller(status):
         all_user_birthday = [i[0] for i in all_user_birthday]
 
         all_info_names_and_birthdays = dict(zip(all_user_name, all_user_birthday))
-        now_date = datetime.now().now.strftime("%Y/%m/%d")
-        now_time = datetime.now().now.strftime("%H:%M")
-        for name, birthday in all_info_names_and_birthdays:
-            
+        now_date = datetime.now().strftime("%Y/%m/%d")
+        now_time = datetime.now().strftime("%H:%M")
+
+        all_birthdays = []
+        for name, birthday in all_info_names_and_birthdays.items():
+            if (birthday == now_date):
+                all_birthdays.append(name)
+        return all_birthdays
 
     elif (status == "deactivate"):
         pass

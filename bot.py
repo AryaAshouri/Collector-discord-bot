@@ -55,19 +55,20 @@ async def birthday(message, status, date=None):
         if (status == "activate"):
             author_all_roles = [i.name for i in message.author.roles]
             if ("Administrator" in author_all_roles):
-                birthday_teller(status)
+                result = birthday_teller(status)
                 await message.reply("Birthday has been activated succesfuly")
+                [await message.channel.send(f"The day has been arrived!\nIts' {i}'s birthday :partying_face::tada:") for i in result]
             else:
                 await message.reply(f"Hey {message.author} only admins could use this command")
 
         elif (status == "deactivate"):
-            author_all_roles = [i.name for i in message.author.roles]
+            author_all_roles = [i.name for i in messagulte.author.roles]
             if ("Administrator" in author_all_roles):
                 birthday_teller(status)
                 await message.reply("Birthday has been deactivated succesfuly")
             else:
                 await message.reply(f"Hey {message.author} only admins could use this command")
-                
+
         else:
             print(status)
             await message.reply("Command is not acceptable")
