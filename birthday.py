@@ -22,7 +22,7 @@ def birthday_teller(status):
 
         all_birthdays = []
         for name, birthday in all_info_names_and_birthdays.items():
-            if (birthday == now_date):
+            if (birthday[4:] == now_date[4:]):
                 all_birthdays.append(name)
         return all_birthdays
 
@@ -66,12 +66,23 @@ def birthday_updater(message, birthday):
     if (message.author.id not in [i[0] for i in all_user_id]):
         return False
     else:
-        cursor.execute(f'''UPDATE Birthday
-          SET birthday = ?
-
-        WHERE user_id = ?''', (
+        cursor.execute('''UPDATE Birthday SET birthday = ? WHERE user_id = ?''', (
         birthday,
         message.author.id))
 
         connection.commit()
         connection.close()
+
+def birthday_deleter(message):
+    connection = sqlite3.connect("Database/birthday.db")
+    cursor = connection.cursor()
+
+    user_trying_delete = cursor.execute(f'''SELECT user_id FROM Birthday WHERE user_id = {message.author.id}''')
+
+    if (user_trying_delete.fetchone() == None):
+        return False
+    else:
+        connection.execute(f'''DELETE FROM Birthday where user_id = {message.author.id}''')
+
+    connection.commit()
+    connection.close()

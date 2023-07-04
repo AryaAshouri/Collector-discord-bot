@@ -49,6 +49,7 @@ async def birthday(message, status, date=None):
                 await message.reply("You haven't added your birthday yet")
             else:
                 await message.reply('Your birthday has been updated succesfuly')
+
         else:
             await message.reply("Command is not acceptable")
     else:
@@ -69,9 +70,15 @@ async def birthday(message, status, date=None):
             else:
                 await message.reply(f"Hey {message.author} only admins could use this command")
 
+        elif (status == "delete"):
+            result = birthday_deleter(message)
+            if (result == False):
+                await message.reply("You haven't added your birthday yet")
+            else:
+                await message.reply("Your birthday has been deleted succesfuly")
+                
         else:
-            print(status)
             await message.reply("Command is not acceptable")
 
 
-bot.run("MTEyMjkzOTUyNDg1MTQ0OTg5MA.Gea3w2.oiW_i68PvvRPlLqYw-TrESLFBSJpsfRxuUDxX8")
+bot.run("MTEyMjkzOTUyNDg1MTQ0OTg5MA.G8XXkw.XePdSpq9PUBmfxGTQNf93tSo3iha6Gt7bkrNd0")
