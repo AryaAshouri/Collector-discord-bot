@@ -76,9 +76,9 @@ async def birthday(message, status, date=None):
                 await message.reply("You haven't added your birthday yet")
             else:
                 await message.reply("Your birthday has been deleted succesfuly")
-                
+
         else:
             await message.reply("Command is not acceptable")
 
 
-bot.run("MTEyMjkzOTUyNDg1MTQ0OTg5MA.G8XXkw.XePdSpq9PUBmfxGTQNf93tSo3iha6Gt7bkrNd0")
+bot.run("BOT_TOKEN")
